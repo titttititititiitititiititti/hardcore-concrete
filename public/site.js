@@ -66,6 +66,8 @@ document.querySelectorAll('[data-fb-reviews]').forEach(a => { a.href = (SITE.fb 
 })();
 
 // Quote form
+// wake the form service early (free Render instances sleep), so the form sends fast
+if (SITE.formEndpoint) { try { fetch(new URL('/health', SITE.formEndpoint), { mode: 'no-cors' }); } catch (e) {} }
 const form = document.getElementById('quote-form');
 if (form) {
   const status = document.getElementById('status');

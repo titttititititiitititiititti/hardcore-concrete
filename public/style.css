@@ -60,7 +60,7 @@ h2{font-family:var(--head);font-weight:900;text-transform:uppercase;color:var(--
 .h1-script{display:block;font-family:var(--script);font-weight:400;color:var(--blue);font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.1;margin:.4em 0 0 .1em;transform:rotate(-2.5deg);transform-origin:left}
 .lede{max-width:48ch;font-size:1.15rem;margin:1.6rem 0 2rem;color:var(--text)}
 .actions{display:flex;flex-wrap:wrap;gap:14px}
-.hero-badge{width:100%;max-width:340px;justify-self:end;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));animation:drop .9s cubic-bezier(.2,.9,.25,1.2) .15s both}
+.hero-badge{width:100%;max-width:340px;height:auto;justify-self:end;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));animation:drop .9s cubic-bezier(.2,.9,.25,1.2) .15s both}
 @keyframes drop{from{opacity:0;transform:translateY(-36px) scale(.94)}to{opacity:1;transform:none}}
 
 .proof{list-style:none;margin:0 auto;padding:0 24px 56px;max-width:1180px;display:grid;grid-template-columns:repeat(4,1fr)}
@@ -156,7 +156,12 @@ h2{font-family:var(--head);font-weight:900;text-transform:uppercase;color:var(--
   .fb-mini{margin-left:auto}
   .brand small{display:none}
   .hero-inner{grid-template-columns:1fr;padding-top:40px}
-  .hero-badge{order:-1;max-width:120px;justify-self:start}
+  .hero-badge{order:-1;width:110px;justify-self:start;margin-bottom:-8px}
+  .hero-inner{gap:22px;padding-top:28px;padding-bottom:36px}
+  .hero-media img,.hero-media video{object-position:55% 50%}
+  .hero-media::after{background:linear-gradient(180deg,rgba(22,24,27,.72) 0%,rgba(22,24,27,.88) 55%,var(--char) 100%)}
+  .lede{margin:1.2rem 0 1.6rem}
+  .proof{padding-bottom:40px}
   .proof{grid-template-columns:1fr 1fr}
   .svc-grid{grid-template-columns:1fr 1fr}
   .svc-feature{grid-row:auto;grid-column:span 2;min-height:280px}
