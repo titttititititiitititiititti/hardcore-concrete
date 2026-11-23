@@ -73,9 +73,44 @@ if (form) {
   const status = document.getElementById('status');
   const btn = form.querySelector('button[type=submit]');
   const label = btn.textContent;
+
+  // Photo picker: up to 5, shrunk in the browser to ~1600px JPEG before sending
+  const MAX = 5;
+  let picked = [];
+  const fileIn = form.querySelector('input[name="photos"]');
+  const thumbs = document.getElementById('pf-thumbs');
+  const drawThumbs = () => {
+    if (!thumbs) return;
+    thumbs.innerHTML = '';
+    picked.forEach((f, i) => {
+      const d = document.createElement('div'); d.className = 'pf-thumb';
+      const img = document.createElement('img'); img.alt = `Photo ${i + 1}`; img.src = URL.createObjectURL(f);
+      const x = document.createElement('button'); x.type = 'button'; x.setAttribute('aria-label', `Remove photo ${i + 1}`); x.textContent = '×';
+      x.onclick = () => { picked.splice(i, 1); drawThumbs(); };
+      d.append(img, x); thumbs.appendChild(d);
+    });
+    if (fileIn) fileIn.closest('.pf-add').hidden = picked.length >= MAX;
+  };
+  if (fileIn) fileIn.addEventListener('change', () => {
+    picked = picked.concat([...fileIn.files].filter(f => f.type.startsWith('image/'))).slice(0, MAX);
+    fileIn.value = ''; drawThumbs();
+  });
+  const shrink = file => new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(img.src);
+      resolve({ name: (file.name || 'photo').replace(/\.[^.]+$/, '') + '.jpg', data: c.toDataURL('image/jpeg', 0.8).split(',')[1] });
+    };
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
+    delete data.photos;
     if (data.website) return;
     if (!data.name.trim() || (!data.phone.trim() && !data.email.trim())) {
       status.className = 'status err';
@@ -93,12 +128,13 @@ if (form) {
       return;
     }
 
-    btn.disabled = true; btn.textContent = 'Sending…';
+    btn.disabled = true; btn.textContent = picked.length ? 'Sending photos…' : 'Sending…';
+    try { data.photos = await Promise.all(picked.map(shrink)); } catch (e) { data.photos = []; }
     try {
       const res = await fetch(SITE.formEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, site: SITE.id }) });
       const out = await res.json();
       if (!out.ok) throw new Error(out.error);
-      form.reset();
+      form.reset(); picked = []; drawThumbs();
       status.className = 'status ok';
       status.textContent = "Quote request sent. We'll be in touch soon.";
     } catch (err) {

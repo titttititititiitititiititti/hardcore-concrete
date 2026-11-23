@@ -207,3 +207,18 @@ h2{font-family:var(--head);font-weight:900;text-transform:uppercase;color:var(--
 .gallery-more{display:block;margin:28px auto 0;background:transparent;color:var(--cream);border:2px solid var(--cream)}
 .gallery-more:hover{background:var(--cream);color:var(--char)}
 .gallery button[hidden]{display:none}
+
+/* photo upload on the quote form */
+.photo-field{display:grid;gap:8px}
+.pf-label{font-weight:700;font-size:.95rem}
+.pf-label small{font-weight:400;color:#6b655d}
+.pf-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pf-add{position:relative;display:grid;place-items:center;width:84px;height:84px;border:2px dashed #b9ae9f;background:#fff;cursor:pointer;font-weight:700;font-size:.85rem;text-align:center;line-height:1.2;color:var(--char)}
+.pf-add:hover{border-color:var(--blue);color:var(--blue)}
+.pf-add input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.pf-add:focus-within{outline:3px solid var(--blue);outline-offset:2px}
+.pf-thumbs{display:contents}
+.pf-thumb{position:relative;width:84px;height:84px}
+.pf-thumb img{width:100%;height:100%;object-fit:cover}
+.pf-thumb button{position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;border:0;background:var(--char);color:#fff;font-size:1rem;line-height:1;cursor:pointer}
+.pf-add[hidden]{display:none}
