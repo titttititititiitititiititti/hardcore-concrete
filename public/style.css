@@ -77,14 +77,15 @@ h2{font-family:var(--head);font-weight:900;text-transform:uppercase;color:var(--
 .svc:hover{background-color:#474c51}
 .svc h3{font:900 2rem/1 var(--head);text-transform:uppercase;color:var(--cream);margin-bottom:.6rem;letter-spacing:.01em}
 .svc p{margin:0;color:#CBC7C1}
-.svc-feature{grid-row:span 2;background:linear-gradient(180deg,rgba(21,60,93,.25),rgba(21,60,93,.85)),url(/img/pour.jpg) 70% 50%/cover;display:flex;flex-direction:column;justify-content:end}
+.svc-feature{grid-row:span 2;background:linear-gradient(180deg,rgba(21,60,93,.25),rgba(21,60,93,.85)),url(/img/driveway.jpg) 50% 60%/cover;display:flex;flex-direction:column;justify-content:end}
 .svc-feature:hover{background-color:transparent}
 .svc-feature h3{font-size:2.8rem}
 
 /* videos */
 .videos{padding:100px 0}
 .reels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.reel{position:relative;aspect-ratio:9/16;overflow:hidden;text-decoration:none;color:#fff;background:url(/img/pour.jpg) var(--pos,50% 50%)/auto 100% no-repeat,var(--char-2)}
+.reel{all:unset;box-sizing:border-box;cursor:pointer;display:block;position:relative;aspect-ratio:9/16;overflow:hidden;text-decoration:none;color:#fff;background:var(--poster,url(/img/pour.jpg)) center/cover no-repeat,var(--char-2)}
+.reel:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .reel::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent 45%)}
 .reel:hover .play{transform:translate(-50%,-50%) scale(1.08);background:var(--blue)}
 .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(22,24,27,.7);border:2px solid var(--cream);display:grid;place-items:center;transition:transform .2s,background .2s;z-index:1}
@@ -178,3 +179,26 @@ h2{font-family:var(--head);font-weight:900;text-transform:uppercase;color:var(--
   .hero-badge{animation:none}
   .play,.svc{transition:none}
 }
+
+/* video player */
+#reelbox{border:0;padding:0;background:transparent;overflow:visible}
+#reelbox::backdrop{background:rgba(13,15,17,.92)}
+#reelbox .reel-frame{width:min(400px,90vw);aspect-ratio:9/16;max-height:86vh;background:#000}
+#reelbox iframe{width:100%;height:100%;border:0;display:block}
+#reelbox .close{position:fixed;top:16px;right:20px;font-size:2.4rem;line-height:1;color:#fff;background:none;border:0;cursor:pointer}
+
+/* reviews */
+.reviews{padding:100px 0;background:var(--char-2) var(--grain)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#0d0f11;border:4px solid #0d0f11}
+.rev{margin:0;padding:28px 26px;background:#2c3034 var(--grain);display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.rev blockquote{margin:0;color:var(--text);font-size:1.02rem}
+.rev blockquote::before{content:"\201C";display:block;font:900 3.4rem/.6 var(--head);color:var(--blue);margin-bottom:6px}
+.rev figcaption{font:700 1.05rem/1 var(--head);text-transform:uppercase;letter-spacing:.06em;color:var(--cream)}
+.rev-big{grid-row:span 2;background:var(--blue-dk) var(--grain)}
+.rev-big blockquote{font-size:1.35rem;line-height:1.5;color:#fff}
+@media (max-width:960px){.rev-grid{grid-template-columns:1fr 1fr}.rev-big{grid-column:span 2;grid-row:auto}}
+@media (max-width:560px){.rev-grid{grid-template-columns:1fr}.rev-big{grid-column:auto}}
+
+.gallery-more{display:block;margin:28px auto 0;background:transparent;color:var(--cream);border:2px solid var(--cream)}
+.gallery-more:hover{background:var(--cream);color:var(--char)}
+.gallery button[hidden]{display:none}

@@ -9,6 +9,24 @@ const SITE = window.SITE || {};
 // Facebook links
 document.querySelectorAll('[data-fb]').forEach(a => { if (SITE.fb) { a.href = SITE.fb; a.target = '_blank'; a.rel = 'noopener'; } });
 
+// Reels link + review link + video player (Facebook embed)
+document.querySelectorAll('[data-fb-reels]').forEach(a => { a.href = SITE.reels || SITE.fb; a.target = '_blank'; a.rel = 'noopener'; });
+document.querySelectorAll('[data-fb-reviews]').forEach(a => { a.href = (SITE.fb || '') + '&sk=reviews'; a.target = '_blank'; a.rel = 'noopener'; });
+(() => {
+  const box = document.getElementById('reelbox');
+  if (!box) return;
+  const frame = box.querySelector('.reel-frame');
+  document.querySelectorAll('[data-reel]').forEach(b => b.addEventListener('click', () => {
+    const href = encodeURIComponent('https://www.facebook.com/reel/' + b.dataset.reel);
+    frame.innerHTML = `<iframe src="https://www.facebook.com/plugins/video.php?href=${href}&show_text=false&autoplay=true" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Hardcore Concrete video"></iframe>`;
+    box.showModal();
+  }));
+  const close = () => { box.close(); };
+  box.querySelector('.close').onclick = close;
+  box.addEventListener('click', e => { if (e.target === box) close(); });
+  box.addEventListener('close', () => { frame.innerHTML = ''; });
+})();
+
 // Gallery: list comes from /gallery/index.json (static hosting) or /api/gallery (server)
 (async () => {
   const box = document.getElementById('gallery');
@@ -26,14 +44,23 @@ document.querySelectorAll('[data-fb]').forEach(a => { if (SITE.fb) { a.href = SI
     box.innerHTML = '<p class="gallery-empty">Job photos are on their way. See our latest work on Facebook in the meantime.</p>';
     return;
   }
+  const SHOW = SITE.galleryShow || 9;
   photos.forEach((src, i) => {
     const b = document.createElement('button');
+    if (i >= SHOW) b.hidden = true;
     b.type = 'button';
     b.setAttribute('aria-label', `Open job photo ${i + 1}`);
     b.innerHTML = `<img src="${src}" alt="Job photo ${i + 1}" loading="lazy">`;
     b.onclick = () => { lbImg.src = src; lb.showModal(); };
     box.appendChild(b);
   });
+  if (photos.length > SHOW) {
+    const more = document.createElement('button');
+    more.type = 'button'; more.className = 'gallery-more btn';
+    more.textContent = `Show all ${photos.length} photos`;
+    more.onclick = () => { box.querySelectorAll('button[hidden]').forEach(x => x.hidden = false); more.remove(); };
+    box.after(more);
+  }
   lb.querySelector('.close').onclick = () => lb.close();
   lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
 })();

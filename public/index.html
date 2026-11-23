@@ -9,7 +9,7 @@
 <link rel="canonical" href="https://hardcoreconcreting.com/">
 <meta property="og:title" content="Hardcore Concrete & Constructions">
 <meta property="og:description" content="Reliable, high quality concreting and construction across the Whitsundays. QBCC licensed and fully insured.">
-<meta property="og:image" content="https://hardcoreconcreting.com/img/pour.jpg">
+<meta property="og:image" content="https://hardcoreconcreting.com/img/hero.jpg">
 <meta property="og:url" content="https://hardcoreconcreting.com/">
 <link rel="preload" href="/fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -39,7 +39,7 @@
   <section class="hero">
     <div class="hero-media" aria-hidden="true">
       <!-- Swap for their best reel: <video autoplay muted loop playsinline poster="/img/pour.jpg"><source src="/video/hero.mp4" type="video/mp4"></video> -->
-      <img src="/img/pour.jpg" alt="">
+      <video autoplay muted loop playsinline preload="auto" poster="/img/hero.jpg"><source src="/video/hero.mp4" type="video/mp4"></video>
     </div>
     <div class="hero-inner">
       <div class="hero-copy">
@@ -101,18 +101,18 @@
         </a>
       </div>
       <div class="reels">
-        <a class="reel" data-fb-reels href="#" style="--pos:30% 50%">
+        <button class="reel" type="button" data-reel="1662421382065507" style="--poster:url(/img/reel-1662421382065507.jpg)">
           <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
-          <span class="reel-cap">Screeding a driveway pour</span>
-        </a>
-        <a class="reel" data-fb-reels href="#" style="--pos:55% 60%">
+          <span class="reel-cap">Power trowelling the slab</span>
+        </button>
+        <button class="reel" type="button" data-reel="1824238229026480" style="--poster:url(/img/reel-1824238229026480.jpg)">
           <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
-          <span class="reel-cap">Four on the bull floats</span>
-        </a>
-        <a class="reel" data-fb-reels href="#" style="--pos:85% 40%">
+          <span class="reel-cap">Screeding a fresh pour</span>
+        </button>
+        <button class="reel" type="button" data-reel="2164907387392673" style="--poster:url(/img/reel-2164907387392673.jpg)">
           <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
-          <span class="reel-cap">Finishing the slab</span>
-        </a>
+          <span class="reel-cap">The crew on a big pour</span>
+        </button>
         <a class="reel reel-more" data-fb-reels href="#">
           <span class="more-num">More</span>
           <span class="reel-cap">Watch every reel on our Facebook page</span>
@@ -142,6 +142,23 @@
         <li><h3>Pour</h3><p>The crew places, screeds and floats the concrete while it's workable.</p></li>
         <li><h3>Finish &amp; cure</h3><p>Final finish, saw cuts and a proper cure. We clean up and hand it over.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews">
+    <div class="wrap">
+      <div class="head head-split">
+        <div><h2>What customers say</h2><p>100% recommended across every Facebook review.</p></div>
+        <a class="btn btn-line" data-fb-reviews href="#">Read all reviews</a>
+      </div>
+      <div class="rev-grid">
+        <figure class="rev rev-big"><blockquote>The whole process was easy from start to finish. Jesse and the crew turned up when they said they would, worked hard and clearly take a lot of pride in their work.</blockquote><figcaption>Josh W.</figcaption></figure>
+        <figure class="rev"><blockquote>Designed the layout with the strip drain and absolutely nailed it. Great workmanship, clean finish and an awesome result.</blockquote><figcaption>Brent W.</figcaption></figure>
+        <figure class="rev"><blockquote>So stoked with the 200 m² shed slab the boys did for us. Will definitely get them back for other jobs.</blockquote><figcaption>Macey-ann S.</figcaption></figure>
+        <figure class="rev"><blockquote>Great communication, very neat and tidy job done and all for a great price. 10/10 would recommend.</blockquote><figcaption>Lucas Q.</figcaption></figure>
+        <figure class="rev"><blockquote>Great service and they hooked in, didn't mess around. Happy and friendly crew.</blockquote><figcaption>Neil S.</figcaption></figure>
+      </div>
     </div>
   </section>
 
@@ -200,12 +217,17 @@
   </div>
 </footer>
 
+<dialog id="reelbox" aria-label="Video">
+  <button class="close" type="button" aria-label="Close video">&times;</button>
+  <div class="reel-frame"></div>
+</dialog>
+
 <dialog id="lightbox" aria-label="Job photo">
   <button class="close" type="button" aria-label="Close photo">&times;</button>
   <img alt="">
 </dialog>
 
-<script>window.SITE = { id: 'hardcore-concrete', fb: 'https://www.facebook.com/search/top?q=Hardcore%20Concrete%20%26%20Constructions', fallbackPhone: '0437 087 941', email: 'hardcreteconstructions@hotmail.com', formEndpoint: '' };</script>
+<script>window.SITE = { id: 'hardcore-concrete', fb: 'https://www.facebook.com/profile.php?id=61583192893630', reels: 'https://www.facebook.com/profile.php?id=61583192893630&sk=reels_tab', fallbackPhone: '0437 087 941', email: 'hardcreteconstructions@hotmail.com', formEndpoint: '' };</script>
 <script src="/site.js" defer></script>
 </body>
 </html>
