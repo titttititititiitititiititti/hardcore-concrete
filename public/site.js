@@ -37,7 +37,7 @@ document.querySelectorAll('[data-fb-reviews]').forEach(a => { a.href = (SITE.fb 
   for (const url of ['/gallery/index.json', '/api/gallery']) {
     try {
       const r = await fetch(url);
-      if (r.ok) { const list = await r.json(); photos = list.map(p => p.startsWith('/') ? p : '/gallery/' + p); break; }
+      if (r.ok) { const list = await r.json(); photos = list.map(p => { const o = typeof p === 'string' ? { src: p } : p; return { src: o.src.startsWith('/') ? o.src : '/gallery/' + o.src, alt: o.alt }; }); break; }
     } catch (e) {}
   }
   if (!photos.length) {
@@ -45,13 +45,13 @@ document.querySelectorAll('[data-fb-reviews]').forEach(a => { a.href = (SITE.fb 
     return;
   }
   const SHOW = SITE.galleryShow || 9;
-  photos.forEach((src, i) => {
+  photos.forEach(({ src, alt }, i) => {
     const b = document.createElement('button');
     if (i >= SHOW) b.hidden = true;
     b.type = 'button';
     b.setAttribute('aria-label', `Open job photo ${i + 1}`);
-    b.innerHTML = `<img src="${src}" alt="Job photo ${i + 1}" loading="lazy">`;
-    b.onclick = () => { lbImg.src = src; lb.showModal(); };
+    b.innerHTML = `<img src="${src}" alt="${(alt || `Job photo ${i + 1}`).replace(/"/g, "&quot;")}" loading="lazy">`;
+    b.onclick = () => { lbImg.src = src; lbImg.alt = alt || ''; lb.showModal(); };
     box.appendChild(b);
   });
   if (photos.length > SHOW) {
